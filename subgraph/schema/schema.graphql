@@ -1,0 +1,73 @@
+type Player @entity {
+  id: ID! # address
+  wins: BigInt!
+  losses: BigInt!
+  draws: BigInt!
+  totalBattles: BigInt!
+  eloRating: BigInt!
+  totalWagered: BigInt!
+  totalWon: BigInt!
+  currentStreak: BigInt!
+  bestStreak: BigInt!
+  battles: [Battle!]! @derivedFrom(field: "players")
+  createdAt: BigInt!
+  updatedAt: BigInt!
+}
+
+type Battle @entity {
+  id: ID! # battleId
+  player1: Player!
+  player2: Player
+  wager: BigInt!
+  status: BattleStatus!
+  winner: Player
+  createdAt: BigInt!
+  completedAt: BigInt
+  player1Revealed: Boolean!
+  player2Revealed: Boolean!
+  players: [Player!]!
+}
+
+enum BattleStatus {
+  Created
+  Active
+  Revealing
+  Completed
+  Cancelled
+  Expired
+}
+
+type Tournament @entity {
+  id: ID! # tournamentId
+  name: String!
+  entryFee: BigInt!
+  prizePool: BigInt!
+  startTime: BigInt!
+  endTime: BigInt!
+  status: TournamentStatus!
+  participants: [Player!]!
+  winners: [Player!]!
+  createdAt: BigInt!
+}
+
+enum TournamentStatus {
+  Pending
+  Active
+  Completed
+}
+
+type Achievement @entity {
+  id: ID! # achievementId
+  name: String!
+  description: String!
+  rarity: BigInt!
+  holders: [Player!]!
+}
+
+type GlobalStats @entity {
+  id: ID! # "global"
+  totalBattles: BigInt!
+  totalWagered: BigInt!
+  totalPlayers: BigInt!
+  totalTournaments: BigInt!
+}

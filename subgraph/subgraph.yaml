@@ -1,0 +1,35 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema/schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PvPBattleGame
+    network: base-sepolia
+    source:
+      address: "CONTRACT_ADDRESS_HERE"
+      abi: PvPBattleGame
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Battle
+        - Player
+        - Tournament
+        - Achievement
+      abis:
+        - name: PvPBattleGame
+          file: ./abis/PvPBattleGame.json
+      eventHandlers:
+        - event: BattleCreated(indexed uint256,indexed address,uint256,address)
+          handler: handleBattleCreated
+        - event: BattleJoined(indexed uint256,indexed address)
+          handler: handleBattleJoined
+        - event: BattleCompleted(indexed uint256,indexed address,uint256)
+          handler: handleBattleCompleted
+        - event: EloUpdated(indexed address,uint256,uint256)
+          handler: handleEloUpdated
+        - event: TournamentCreated(indexed uint256,string,uint256)
+          handler: handleTournamentCreated
+      file: ./src/mapping.ts

@@ -1,0 +1,142 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-dark-bg text-white min-h-screen;
+    background-image:
+      linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+@layer components {
+  .cyber-card {
+    @apply bg-dark-card border border-dark-border rounded-lg p-6;
+    @apply hover:border-cyber-neon/50 transition-all duration-300;
+  }
+
+  .cyber-button {
+    @apply px-6 py-3 rounded-lg font-semibold;
+    @apply bg-gradient-to-r from-cyber-500 to-cyber-600;
+    @apply hover:from-cyber-400 hover:to-cyber-500;
+    @apply transition-all duration-300;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .cyber-button-secondary {
+    @apply px-6 py-3 rounded-lg font-semibold;
+    @apply border-2 border-cyber-neon text-cyber-neon;
+    @apply hover:bg-cyber-neon/10;
+    @apply transition-all duration-300;
+  }
+
+  .neon-text {
+    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+  }
+
+  .glow-border {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3);
+  }
+
+  .battle-move-card {
+    @apply relative p-6 rounded-lg cursor-pointer;
+    @apply border-2 border-dark-border;
+    @apply hover:border-cyber-neon hover:scale-105;
+    @apply transition-all duration-300;
+    @apply flex flex-col items-center gap-2;
+  }
+
+  .battle-move-card.selected {
+    @apply border-cyber-neon bg-cyber-neon/10;
+    @apply animate-glow;
+  }
+
+  .stat-card {
+    @apply bg-dark-card border border-dark-border rounded-lg p-4;
+    @apply flex flex-col gap-1;
+  }
+
+  .stat-label {
+    @apply text-sm text-gray-400;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold text-cyber-neon;
+  }
+
+  .leaderboard-row {
+    @apply flex items-center justify-between p-4;
+    @apply border-b border-dark-border last:border-b-0;
+    @apply hover:bg-cyber-neon/5 transition-colors;
+  }
+
+  .tournament-bracket {
+    @apply flex gap-8 overflow-x-auto pb-4;
+  }
+
+  .bracket-round {
+    @apply flex flex-col gap-4 min-w-[200px];
+  }
+
+  .bracket-match {
+    @apply bg-dark-card border border-dark-border rounded-lg p-3;
+    @apply flex flex-col gap-2;
+  }
+
+  .achievement-badge {
+    @apply relative p-4 rounded-lg;
+    @apply border-2 border-dark-border;
+    @apply hover:scale-105 transition-transform;
+  }
+
+  .achievement-badge.legendary {
+    @apply border-yellow-400 bg-yellow-400/10;
+  }
+
+  .achievement-badge.epic {
+    @apply border-purple-400 bg-purple-400/10;
+  }
+
+  .achievement-badge.rare {
+    @apply border-blue-400 bg-blue-400/10;
+  }
+
+  .achievement-badge.common {
+    @apply border-gray-400 bg-gray-400/10;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2435;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00ffff;
+}
+
+/* Loading animation */
+.loading-dots::after {
+  content: '';
+  animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
